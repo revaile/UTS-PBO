@@ -14,6 +14,7 @@ abstract class Display implements Notification {
 
 //sub class User (inherits from Display)
 class User extends Display {
+    //Encapsulation
     private String username;
     private String password;
     private UUID token;
