@@ -2,14 +2,17 @@ package uts;
 import java.util.Scanner;
 import java.util.UUID;
 
+// Interface for Nontification
 interface Notification {
-    void notifyUser();
+    void notifyUser(); //interface
 }
 
+//abstract class Display 
 abstract class Display implements Notification {
     abstract void showToken(UUID token);
 }
 
+//sub class User (inherits from Display)
 class User extends Display {
     private String username;
     private String password;
@@ -19,6 +22,7 @@ class User extends Display {
         token = UUID.randomUUID();
     }
 
+    //setter
     void setUsername(String username) {
         this.username = username;
     }
@@ -30,7 +34,8 @@ class User extends Display {
     void setToken(UUID token) {
         this.token = token;
     }
-
+    
+    //getter
     String getUsername() {
         return username;
     }
@@ -42,7 +47,7 @@ class User extends Display {
     UUID getToken() {
         return token;
     }
-
+     // Method to set username, password, and generate token
     void register(String username, String password) {
         setUsername(username);
         setPassword(password);
@@ -50,12 +55,14 @@ class User extends Display {
         System.out.println("Password: " + getPassword());
         tokenCreation();
     }
-
+    
+    //Polimorphism
     @Override
     void showToken(UUID token) {
         System.out.println("Token generated: " + token);
     }
-
+    
+    //Polimorphism
     @Override
     public void notifyUser() {
         System.out.println("User created by user");
@@ -63,9 +70,11 @@ class User extends Display {
     }
 }
 
+//subclass Admin (inherits from User)
 class Admin extends User {
     private final String role = "admin";
-
+    
+    //Polimorphism
     @Override
     public void notifyUser() {
         System.out.println("User created by " + role);
@@ -99,6 +108,7 @@ public class Main {
                 user1.notifyUser();
                 System.out.println("---------------------");
             } else if (userTypeChoice == 2) {
+                //Polimorphism
                 User admin = new Admin();
                 System.out.println("---------------------");
                 admin.register(username, password);
